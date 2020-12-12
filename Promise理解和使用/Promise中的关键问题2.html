@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+           /**
+           *! Promise的成功和失败回调函数是异步执行的 
+           *? 3.改变状态和执行回调函数谁先谁后？
+           *todo  (1)都有可能，正常情况下是先指定回调
+           *todo  (2)如何先改变状态再执行回调？  ①在执行器中直接调用resolve/reject ②延迟更长时间再执行then
+           *todo  (3)什么时候才能得到数据？  
+           *todo       ①如果先指定的回调，那么在状态发生改变时，回调函数就会执行就会获取数据
+           *todo       ②如果先改变的状态，那么在指定回调函数时，回调函数就会调用，获取数据
+            */
+          const p1 = new Promise((resolve,reject)=>{
+              setTimeout(()=>{ //后改变状态，同时指定数据，异步执行回调函数
+                  resolve(1)
+              },1000)
+          }).then( //先指定回调函数，保存当前指定的回调函数
+              value=>{
+                  console.log(value)
+              },
+              reason=>{
+                  console.log(reason)
+              }
+          )
+          const p2 = new Promise((resolve,reject)=>{
+               //先改变状态，同时指定数据
+               resolve(1)
+          }).then( //后指定回调函数，异步执行回调函数
+              value=>{
+                  console.log(value)
+              },
+              reason=>{
+                  console.log(reason)
+              }
+          )
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>

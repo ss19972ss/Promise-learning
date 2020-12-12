@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+            const p = new Promise((resolve,reject)=>{
+                throw new Error('err') 
+                /**
+                * ! 1.如果当前是pendding就会变成reject 
+                */
+            })
+            console.log(p)
+
+            /** 
+             * ? 2.一个promise指定多个成功/失败的回调，都会调用吗？
+             *     todo当promise状态改变为对应的状态时都会调用 
+             */
+            const p2 = new Promise((resolve,reject)=>{
+                resolve(1)
+            })
+            p2.then(value=>{
+                console.log(value)
+            })
+            p2.then(value=>{
+                console.log(value)
+            })
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>

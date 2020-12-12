@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+        const res1 = new Promise((resolve,reject)=>{
+            resolve(1)
+        })
+        console.log(res1)
+
+        const res2 = Promise.resolve(2)
+        console.log(res2)
+
+        const res3 = Promise.reject(3)
+        res3.catch(reason=>{console.log(reason)})
+
+        const resAll = Promise.all([res1,res2,res3])
+        console.log(resAll)
+        resAll.then(
+            value=>{},
+            reason=>{
+                console.log(reason)
+            }
+        )
+        </script>
+    </head>
+    <body>
+    
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script src="../lib/Promise_class.js"></script>
+        <script type="text/javascript">
+           /*  var p = new Promise1((resolve,reject)=>{
+                setTimeout(()=>{
+                    reject(1)
+                    console.log('tr')
+                },1000)
+            })
+            const res = p.then(
+                value=>{
+                    console.log(value)
+                },
+                reason=>{
+                    console.log(reason)
+                    return reason
+                    //return new Promise1((resolve,reject)=>{resolve(reason)})
+                }
+            )
+            console.log(res) */
+            var a = new Promise1()
+            console.log(a)
+            const p = Promise1.resolve(1)
+            p.then(value=>{console.log(value)})
+            const p2 = Promise1.resolve(Promise1.resolve(2))
+            const p3 = Promise1.reject(3)
+            const p4 = new Promise1((resolve,reject)=>{
+                setTimeout(()=>{
+                    resolve(4)
+                },1000)
+            })
+            const p6 = new Promise1((resolve,reject)=>{
+                setTimeout(()=>{
+                    resolve(6)
+                },2000)
+            })
+            const p5 = Promise1.race([p3,p4,p6])
+            p5.then(
+                value=>{console.log("value"+value)},
+                reason=>{console.log("reason"+reason)}
+            )
+        </script>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script type="text/javascript">
+            const p = new Promise((resolve,reject)=>{
+                reject(1)
+            })
+            const q = p.then(
+                value=>{
+                    return Promise.resolve(value)
+                },
+                reason=>{
+                    return "err"
+                }
+            )
+            q.then(
+                value=>{
+                    console.log("value"+value)
+                },
+                reason=>{
+                    console.log("reason"+reason)
+                }
+            )
+        </script>
+    </body>
+</html>

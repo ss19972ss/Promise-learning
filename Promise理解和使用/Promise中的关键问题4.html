@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+        /**
+        *? promise如何串联多个操作任务？
+        *todo  1.promise的then返回一个新的promise，可以形成then的链式调用
+        *todo  2.通过then的链式调用串联多个同步/异步任务
+         */    
+        new Promise((resolve,rejected)=>{
+            setTimeout(()=>{
+                console.log("执行任务一(异步)")
+                resolve(1)
+            },1000)
+        }).then(
+            value=>{
+                console.log("任务一的结果:",value)
+                console.log("执行任务二(同步)")
+                return 2
+            }
+        ).then(
+            value=>{
+               // return new Promise(()=>{})  返回一个pendding的promise可以中断promise链
+                console.log("任务二的结果:",value)
+                return new Promise((resolve,rejected)=>{
+                    setTimeout(()=>{
+                        console.log("执行任务三")
+                        resolve(3)
+                    },1000)
+                })
+            }
+        ).then(
+            value=>{
+                console.log("任务三的结果:",value)
+            }
+        ).catch(
+            reason=>{
+                console.log("失败",reason) //前面任何地方出现异常，都会传到最后失败的回调中处理
+            }
+        )
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
