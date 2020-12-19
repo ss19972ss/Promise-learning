@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script type="text/javascript">
+            setTimeout(()=>{
+                console.log('setTimeout1')
+                Promise.resolve(3).then(
+                    value=>{ console.log('promise3',value) } //每次执行宏任务之前，都会先检查微队列里面是不是空的
+                )
+            })  
+            setTimeout(()=>{
+                console.log('setTimeout2')
+            })
+            Promise.resolve(1).then(
+                value=>{ console.log('promise1',value) }
+            )
+            Promise.resolve(2).then(
+                value=>{ console.log('promise2',value) }
+            )  
+        </script>
+    </body>
+</html>

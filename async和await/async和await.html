@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+        /**
+        *? 描述：
+        *todo  await表达式会暂停整个async函数的执行进程并出让其控制权，
+        *todo  只有当其等待的基于promise的异步操作被兑现或被拒绝之后才会恢复进程。promise的解决值会被当作该await表达式的返回值。
+        *!  async函数的函数体可以被看作是由0个或者多个await表达式分割开来的。
+        *!  从第一行代码直到（并包括）第一个await表达式（如果有的话）都是同步运行的。
+        *!  这样的话，一个不含await表达式的async函数是会同步运行的。然而，如果函数体内有一个await表达式，async函数就一定会异步执行。 
+        
+        *? await返回值：
+        *todo  1.等待promise对象，则返回promise成功的结果(使用trycatch获得失败的结果)
+        *todo  2.等待非promise对象，则返回值本身
+        */
+          async function fn(){ //async函数会返回promise对象,promise的结果由函数执行结果决定
+              return new Promise((resolve,reject)=>{
+                  setTimeout(()=>{
+                      resolve(1)
+                  },2000)
+              })
+          }
+          const res = fn()
+          res.then(
+              value=>{
+                  console.log(value)
+              },
+              reason=>{
+                  console.log(reason)
+              }
+          )
+
+          function fn2(){
+              return Promise.reject(2)
+          }
+          async function fn3(){
+              try{
+                const data = await fn2() 
+                console.log(data)
+              }catch(err){
+                console.log(err)
+              }
+          }
+          fn3()
+        </script>
+    </head>
+</html>
