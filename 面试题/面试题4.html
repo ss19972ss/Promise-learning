@@ -20,7 +20,7 @@
                 }).then(() => {
                     console.log("4")
                 }).then(() => {
-                    console.log("5") //在执行这个回调函数之前，promise的状态已经改变
+                    console.log("5") //在执行这个回调函数之前then已经同步执行，promise的状态已经改变
                 })
             }).then(() => {
                 console.log("6")
